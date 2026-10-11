@@ -6,6 +6,15 @@ public class Instructor {
     private String firstName;
     private String email;
     private String phone;
+    private Subject[] subjects;
+    private int subjectCount;
+    private static final int MAX_SUBJECTS = 50;
+
+    // I added these last three variables in order to represent the one-to-many relationship between the two classes Instructor and Subject.
+    // An Instructor can take many Subjects. I suppose that MAX_SUBJECTS is 50.
+    // It will be the same thing as the Student-Major relationship
+    // I added a method called addSUbject to add a subject taken by an instructor
+    // I also added a getter for the subjectCount
 
     public Instructor(String employeeNumber, String lastName, String firstName, String email, String phone) {
         this.employeeNumber = employeeNumber;
@@ -13,10 +22,38 @@ public class Instructor {
         this.firstName = firstName;
         this.email = email;
         this.phone = phone;
+
+        this.subjects = new Subject[MAX_SUBJECTS];
+        this.subjectCount = 0;
     }
 
-    public String getLastName(){return lastName;}
-    public String getFirstName(){return firstName;}
+    public String getLastName(){
+        return lastName;
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Subject[] getSubjects() {
+        return subjects;
+    }
+
+    public int getSubjectCount() {
+        return subjectCount;
+    }
 
     public String cleanEmployeeNumber() {
         return employeeNumber.trim().replace(" ", "");
@@ -51,6 +88,15 @@ public class Instructor {
             sb.append(firstName);
         }
         return sb.toString();
+    }
+
+    public void addSubject(Subject subject) {
+        if (subject == null || subjectCount >= MAX_SUBJECTS) {
+            return;
+        }
+
+        subjects[subjectCount] = subject;
+        subjectCount++;
     }
 
 }

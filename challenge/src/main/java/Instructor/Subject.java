@@ -3,10 +3,20 @@ package Instructor;
 public class Subject {
     private String code;
     private String title;
+    private Instructor instructor;
 
-    public Subject(String code, String title) {
+    //Instructor is an attribute since each Subject has exactly one Instructor
+
+    public Subject(String code, String title, Instructor instructor) {
         this.code = code;
         this.title = title;
+        this.instructor = instructor;
+
+        // We have to add this subject to the instructor's list of subjects
+        if (instructor != null){
+            instructor.addSubject(this);
+        }
+
     }
 
     public String normalizedCode() {
@@ -31,6 +41,18 @@ public class Subject {
         }
 
         return sb.toString().trim().replaceAll(" +", " ");
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
     }
 
     public boolean isIntroCourse() {
